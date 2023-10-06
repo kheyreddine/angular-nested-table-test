@@ -1,0 +1,55 @@
+<section class="m-4">
+  <input type="text" class="form-control mb-3" placeholder="Search by Name" (keyup)="onSearch($event.target)" />
+
+  <table class="table table-bordered" aria-describedby="">
+    <thead class="thead-dark">
+      <tr>
+        <th>
+          <input type="checkbox" (change)="selectAll($event)" [disabled]="anyCheckboxSelected" />
+        </th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Company Name</th>
+        <th></th>
+        <th>
+          <button class="btn btn-danger" *ngIf="anyCheckboxSelected">Delete multiple</button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let row of tableData; let i = index">
+        <tr class="hover-row" (mouseenter)="hoveredRow = i" (mouseleave)="hoveredRow = null">
+          <td>
+            <input type="checkbox" [(ngModel)]="row.selected" (change)="onRowSelect(row)" />
+          </td>
+          <td>
+            <span class="d-flex align-items-center">
+              <button class="btn btn-link" (click)="toggleRow(row)">
+                <i class="bi bi-chevron-right expand-icon" [ngClass]="{'bi-chevron-down': expandedRows[row.name]}"></i>
+              </button>
+              {{ row.name }}
+            </span>
+          </td>
+          <td>{{ row.type }}</td>
+          <td>{{ row.email }}</td>
+          <td>{{ row.phoneNo }}</td>
+          <td>{{ row.companyName }}</td>
+          <td>
+            <div class="d-flex">
+              <button class="btn btn-danger mx-1" *ngIf="hoveredRow === i">Delete</button>
+              <button class="btn btn-primary mx-1" *ngIf="hoveredRow === i && !row.children">Edit</button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="row.children && isRowExpanded(row)">
+          <td colspan="7">
+            <app-nested-table [tableData]="row.children"></app-nested-table>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+</section>
