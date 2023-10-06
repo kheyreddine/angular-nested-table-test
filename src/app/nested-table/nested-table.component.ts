@@ -52,4 +52,19 @@ export class NestedTableComponent {
   onSearch(query: any) {
     // Implement logic for searching and updating the displayed rows
   }
+
+  deleteMultiple() {
+    const selectedRows = this.tableData.filter((row) => row.selected);
+
+    if (selectedRows.length > 0) {
+      // Implement the logic to delete multiple rows here
+
+      // After deletion, you may want to update the table data
+      // For example:
+      this.tableData = this.tableData.filter((row) => !row.selected);
+
+      // Reset the checkboxes
+      this.anyCheckboxSelected = false;
+    }
+  }
 }
