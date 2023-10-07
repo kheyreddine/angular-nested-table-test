@@ -11,20 +11,11 @@ import { SearchService } from '../services/search.service';
   templateUrl: './nested-table.component.html',
   styleUrls: ['./nested-table.component.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ResizeColumnDirective,
-  ],
+  imports: [CommonModule, FormsModule, ResizeColumnDirective],
 })
 export class NestedTableComponent {
   @Input() tableData: Person[] = TABLE_DATA;
   hoveredRow: number | null = null;
-  // Object to keep track of expanded state for each row
-  expandedRows: { [key: string]: boolean } = {};
-
-  // Object to keep track of selected state for each row
-  selectedRows: { [key: string]: boolean } = {};
 
   // Add a property to keep track of selected checkboxes
   anyCheckboxSelected: boolean = false;
@@ -54,16 +45,12 @@ export class NestedTableComponent {
   }
 
   toggleRow(row: Person) {
-    this.expandedRows[row.name] = !this.expandedRows[row.name];
+    row.expanded = !row.expanded;
   }
 
-  isRowExpanded(row: Person): boolean {
-    return this.expandedRows[row.name];
-  }
-
-  isRowSelected(row: Person): boolean {
-    return this.selectedRows[row.name];
-  }
+  // isRowSelected(row: Person): boolean {
+  //   return this.selectedRows[row.name];
+  // }
 
   // Function to filter the table data based on the search query
   private filterTableData(query: string): void {
@@ -98,17 +85,6 @@ export class NestedTableComponent {
   }
 
   deleteMultiple() {
-    const selectedRows = this.tableData.filter((row) => row.selected);
-
-    if (selectedRows.length > 0) {
-      // Implement the logic to delete multiple rows here
-
-      // After deletion, you may want to update the table data
-      // For example:
-      this.tableData = this.tableData.filter((row) => !row.selected);
-
-      // Reset the checkboxes
-      this.anyCheckboxSelected = false;
-    }
+    // Deleting multiple rows
   }
 }

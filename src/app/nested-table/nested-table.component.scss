@@ -5,3 +5,14 @@
 .bi-chevron-down {
   transform: rotate(90deg);
 }
+
+thead th {
+  font-size: 1em;
+  padding: 10px !important;
+  height: 50px;
+}
+
+/* Add this to your component's SCSS file or global styles */
+[appResizeColumn] {
+  cursor: ew-resize; /* Set cursor to east-west (horizontal resize) */
+}

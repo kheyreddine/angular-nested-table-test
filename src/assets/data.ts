@@ -1,3 +1,5 @@
+import { Person } from "src/app/models/person";
+
 export const TABLE_DATA = [
   {
     name: 'Susan Boyle',
@@ -170,3 +172,16 @@ export const TABLE_DATA = [
     address: '169 11th Street, 94103 San Francisco',
   },
 ];
+
+// Initialize expanded and selected properties for each person
+function initializeProperties(person: Person) {
+  person.expanded = false; // Set to false by default
+  person.selected = false; // Set to false by default
+
+  if (person.children) {
+    person.children.forEach(child => initializeProperties(child));
+  }
+}
+
+// Initialize properties for each person in TABLE_DATA
+TABLE_DATA.forEach(person => initializeProperties(person));

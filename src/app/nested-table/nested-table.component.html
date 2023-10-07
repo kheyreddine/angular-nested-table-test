@@ -1,11 +1,10 @@
-<div class="table-responsive mt-4">
-
-
-  <table class="table table-hover table-fixed align-middle table-sm" aria-describedby="">
-    <thead class="table-light h-auto">
-      <tr class="">
-        <th class="" appResizeColumn>
-          <input class="form-check-input" type="checkbox" (change)="selectAll($event)" [disabled]="anyCheckboxSelected" />
+<div class="table-responsive">
+  <table class="table table-hover table-bordered table-fixed align-middle" aria-describedby="">
+    <thead class="table-light">
+      <tr>
+        <th>
+          <input class="form-check-input" type="checkbox" (change)="selectAll($event)"
+            [disabled]="anyCheckboxSelected" />
         </th>
         <th appResizeColumn>Name</th>
         <th appResizeColumn>Type</th>
@@ -13,20 +12,22 @@
         <th appResizeColumn>Phone number</th>
         <th appResizeColumn>Company name</th>
         <th class="col-2">
-          <button class="btn m-0 p-0 btn-link" *ngIf="anyCheckboxSelected" (click)="deleteMultiple()">Delete multiple</button>
+          <button class="btn btn-link p-0 m-0" *ngIf="anyCheckboxSelected" (click)="deleteMultiple()">Delete
+            multiple</button>
         </th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="shadow-sm">
       <ng-container *ngFor="let row of tableData; let i = index">
         <tr class="hover-row" (mouseenter)="hoveredRow = i" (mouseleave)="hoveredRow = null">
           <td>
-            <input class="form-check-input" type="checkbox" [(ngModel)]="row.selected" (change)="onRowSelect(row)" />
+            <input class="form-check-input" type="checkbox" [checked]="row.selected" (change)="onRowSelect(row)" />
           </td>
           <td>
             <span class="d-flex align-items-center">
               <button class="btn btn-link" (click)="toggleRow(row)">
-                <i class="bi bi-chevron-compact-right expand-icon" [ngClass]="{'bi-chevron-compact-down': expandedRows[row.name]}"></i>
+                <i class="bi bi-chevron-compact-right expand-icon"
+                  ></i>
               </button>
               {{ row.name }}
             </span>
@@ -37,12 +38,14 @@
           <td>{{ row.companyName }}</td>
           <td>
             <div class="d-flex">
-              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i"><i class="bi-trash3"></i></button>
-              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i && !row.children"><i class="bi-pen"></i></button>
+              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i && !row.selected"><i
+                  class="bi-trash3"></i></button>
+              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i && !row.children && !row.selected"><i
+                  class="bi-pen"></i></button>
             </div>
           </td>
         </tr>
-        <tr *ngIf="row.children && isRowExpanded(row)">
+        <tr *ngIf="row.children && row.expanded">
           <td colspan="7">
             <app-nested-table [tableData]="row.children"></app-nested-table>
           </td>
