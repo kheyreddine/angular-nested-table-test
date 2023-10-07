@@ -1,56 +1,79 @@
 <div class="table-responsive">
   <table class="table table-hover table-bordered table-fixed align-middle" aria-describedby="">
+    <!-- Table Header -->
     <thead class="table-light">
       <tr>
+        <!-- Checkbox column for selecting all rows -->
         <th>
           <input class="form-check-input" type="checkbox" (change)="selectAll($event)"
             [disabled]="anyCheckboxSelected" />
         </th>
+        <!-- Column for 'Name' -->
         <th appResizeColumn>Name</th>
+        <!-- Column for 'Type' -->
         <th appResizeColumn>Type</th>
+        <!-- Column for 'Email' -->
         <th appResizeColumn>Email</th>
+        <!-- Column for 'Phone number' -->
         <th appResizeColumn>Phone number</th>
+        <!-- Column for 'Company name' -->
         <th appResizeColumn>Company name</th>
+        <!-- Column for actions (delete multiple) -->
         <th class="col-2">
           <button class="btn btn-link p-0 m-0" *ngIf="anyCheckboxSelected" (click)="deleteMultiple()">Delete
             multiple</button>
         </th>
       </tr>
     </thead>
+    <!-- Table Body -->
     <tbody class="shadow-sm">
+      <!-- Loop through each row of data -->
       <ng-container *ngFor="let row of tableData; let i = index">
         <tr class="hover-row" (mouseenter)="hoveredRow = i" (mouseleave)="hoveredRow = null">
+          <!-- Checkbox for selecting individual rows -->
           <td>
             <input class="form-check-input" type="checkbox" [checked]="row.selected" (change)="onRowSelect(row)" />
           </td>
+          <!-- 'Name' column with toggle button for nested data -->
           <td>
             <span class="d-flex align-items-center">
               <button class="btn btn-link" (click)="toggleRow(row)">
-                <i class="bi"
-                  [ngClass]="{'bi-chevron-right': !row.expanded, 'bi-chevron-down': row.expanded}"></i>
+                <i class="bi" [ngClass]="{'bi-chevron-right': !row.expanded, 'bi-chevron-down': row.expanded}"></i>
               </button>
               {{ row.name }}
             </span>
           </td>
+          <!-- 'Type' column -->
           <td>{{ row.type }}</td>
+          <!-- 'Email' column -->
           <td>{{ row.email }}</td>
+          <!-- 'Phone number' column -->
           <td>{{ row.phoneNo }}</td>
+          <!-- 'Company name' column -->
           <td>{{ row.companyName }}</td>
+          <!-- Actions buttons column -->
           <td>
             <div class="d-flex">
-              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i && !row.children"><i class="bi-trash3"></i></button>
-              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i && !row.children"><i class="bi-pen"></i></button>
-              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i && row.children"><i class="bi-trash3"></i></button>
+              <!-- Button for deleting a row -->
+              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i && !row.children"><i
+                  class="bi-trash3"></i></button>
+              <!-- Button for editing a row -->
+              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i && !row.children"><i
+                  class="bi-pen"></i></button>
+              <!-- Button for deleting a row in nested table -->
+              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i && row.children"><i
+                  class="bi-trash3"></i></button>
             </div>
           </td>
         </tr>
+        <!-- Nested table row -->
         <tr *ngIf="row.children && row.expanded">
           <td colspan="7">
+            <!-- Render nested table component with child data -->
             <app-nested-table [tableData]="row.children"></app-nested-table>
           </td>
         </tr>
       </ng-container>
     </tbody>
   </table>
-
 </div>

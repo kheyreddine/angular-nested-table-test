@@ -6,6 +6,7 @@ import { TABLE_DATA } from 'src/assets/data';
 import { ResizeColumnDirective } from '../directives/resize-column.directive';
 import { Person } from '../models/person';
 import { SearchService } from '../services/search.service';
+
 @Component({
   selector: 'app-nested-table',
   templateUrl: './nested-table.component.html',
@@ -14,23 +15,31 @@ import { SearchService } from '../services/search.service';
   imports: [CommonModule, FormsModule, ResizeColumnDirective],
 })
 export class NestedTableComponent {
+  // Input property to receive table data from parent component
   @Input() tableData: Person[] = TABLE_DATA;
+
+  // Variable to keep track of the currently hovered row
   hoveredRow: number | null = null;
 
-  // Add a property to keep track of selected checkboxes
+  // Variable to track if any checkbox is selected
   anyCheckboxSelected: boolean = false;
 
+  // Observable for search functionality
   private searchSubject = new Subject<string>();
-  private currentSearchQuery: string = ''; // Add this variable
 
+  // Variable to store the current search query
+  private currentSearchQuery: string = '';
+
+  // Constructor with dependency injection of search service
   constructor(private searchService: SearchService) {
+    // Subscribe to search service to receive search queries
     this.searchService.getSearchValue().subscribe((query) => {
       this.currentSearchQuery = query;
       this.filterTableData(query);
     });
   }
 
-  // Add the rest of the functions here...
+  // Function to select all checkboxes
   selectAll(event: Event) {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach((checkbox: any) => {
@@ -39,18 +48,16 @@ export class NestedTableComponent {
     });
   }
 
+  // Function to handle individual row selection
   onRowSelect(row: Person) {
     row.selected = !row.selected;
     this.anyCheckboxSelected = this.tableData.some((row) => row.selected);
   }
 
+  // Function to toggle nested row visibility
   toggleRow(row: Person) {
     row.expanded = !row.expanded;
   }
-
-  // isRowSelected(row: Person): boolean {
-  //   return this.selectedRows[row.name];
-  // }
 
   // Function to filter the table data based on the search query
   private filterTableData(query: string): void {
@@ -84,6 +91,7 @@ export class NestedTableComponent {
     this.searchService.setSearchValue(query);
   }
 
+  // Function to handle deletion of multiple rows
   deleteMultiple() {
     // Deleting multiple rows
   }
