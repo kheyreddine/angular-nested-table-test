@@ -3,10 +3,10 @@ import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 import { TABLE_DATA } from 'src/assets/data';
 import { ResizeColumnDirective } from '../directives/resize-column.directive';
 import { Person } from '../models/person';
+import { SearchService } from '../services/search.service';
 @Component({
   selector: 'app-nested-table',
   templateUrl: './nested-table.component.html',
@@ -34,9 +34,10 @@ export class NestedTableComponent {
   private searchSubject = new Subject<string>();
   private currentSearchQuery: string = ''; // Add this variable
 
-  constructor() {
-    this.searchSubject.pipe(debounceTime(300)).subscribe(() => {
-      this.filterTableData(this.currentSearchQuery); // Use the current search query
+  constructor(private searchService: SearchService) {
+    this.searchService.getSearchValue().subscribe((query) => {
+      this.currentSearchQuery = query;
+      this.filterTableData(query);
     });
   }
 
@@ -95,9 +96,7 @@ export class NestedTableComponent {
   // Function to handle search input
   onSearch(event: any) {
     const query = event.target.value;
-    this.currentSearchQuery = query; // Update the current search query
-
-    this.searchSubject.next(query);
+    this.searchService.setSearchValue(query);
   }
 
   deleteMultiple() {

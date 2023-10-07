@@ -8,8 +8,8 @@ describe('NestedTableComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NestedTableComponent]
-    });
+    imports: [NestedTableComponent]
+});
     fixture = TestBed.createComponent(NestedTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
