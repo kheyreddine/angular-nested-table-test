@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs';
 import { TABLE_DATA } from 'src/assets/data';
 import { ResizeColumnDirective } from '../directives/resize-column.directive';
@@ -13,9 +12,8 @@ import { SearchService } from '../services/search.service';
   styleUrls: ['./nested-table.component.scss'],
   standalone: true,
   imports: [
-    FormsModule,
     CommonModule,
-    BrowserAnimationsModule,
+    FormsModule,
     ResizeColumnDirective,
   ],
 })
