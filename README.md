@@ -1,27 +1,43 @@
-# AngularNestedTableTest
+# Angular Nested Table Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.4.
+This project is an Angular-based application for displaying and managing tabular data with nested rows.
 
-## Development server
+## Table of Contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Features](#features)
+4. [Contributing](#contributing)
+5. [License](#license)
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+To set up and install the project, follow these steps:
 
-## Build
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/your-repo.git
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+# Navigate to the project directory
+cd your-repo
 
-## Running unit tests
+## Usage
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Install dependencies
+npm install
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+# Start the development server
+ng serve
 
-## Further help
+# Open the application in a web browser
+Go to http://localhost:4200/
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Features
+
+This project includes the following features:
+
+- Checkbox-based selection of rows.
+- Expandable nested rows.
+- Filtering based on search queries.
+- Option to delete multiple selected rows.
