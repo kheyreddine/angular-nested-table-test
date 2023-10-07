@@ -26,8 +26,8 @@
           <td>
             <span class="d-flex align-items-center">
               <button class="btn btn-link" (click)="toggleRow(row)">
-                <i class="bi bi-chevron-compact-right expand-icon"
-                  ></i>
+                <i class="bi"
+                  [ngClass]="{'bi-chevron-right': !row.expanded, 'bi-chevron-down': row.expanded}"></i>
               </button>
               {{ row.name }}
             </span>
