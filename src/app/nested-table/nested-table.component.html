@@ -38,10 +38,9 @@
           <td>{{ row.companyName }}</td>
           <td>
             <div class="d-flex">
-              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i && !row.selected"><i
-                  class="bi-trash3"></i></button>
-              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i && !row.children && !row.selected"><i
-                  class="bi-pen"></i></button>
+              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i && !row.children"><i class="bi-trash3"></i></button>
+              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i && !row.children"><i class="bi-pen"></i></button>
+              <button class="btn btn-light mx-1" *ngIf="hoveredRow === i && row.children"><i class="bi-trash3"></i></button>
             </div>
           </td>
         </tr>
