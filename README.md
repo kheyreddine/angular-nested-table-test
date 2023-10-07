@@ -7,8 +7,6 @@ This project is an Angular-based application for displaying and managing tabular
 1. [Installation](#installation)
 2. [Usage](#usage)
 3. [Features](#features)
-4. [Contributing](#contributing)
-5. [License](#license)
 
 ## Installation
 
@@ -22,7 +20,7 @@ git clone https://github.com/yourusername/your-repo.git
 cd your-repo
 ```
 ## Usage
-```
+```bash
 # Install dependencies
 npm install
 
