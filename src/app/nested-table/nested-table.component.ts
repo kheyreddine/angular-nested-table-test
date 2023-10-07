@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TABLE_DATA } from 'src/assets/data';
+import { ResizeColumnDirective } from '../directives/resize-column.directive';
 import { Person } from '../models/person';
 
 @Component({
@@ -9,7 +11,7 @@ import { Person } from '../models/person';
   templateUrl: './nested-table.component.html',
   styleUrls: ['./nested-table.component.scss'],
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, BrowserAnimationsModule, ResizeColumnDirective],
 })
 export class NestedTableComponent {
   @Input() tableData: Person[] = TABLE_DATA;
