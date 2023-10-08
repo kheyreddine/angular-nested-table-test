@@ -1,0 +1,31 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Angular App
+        run: ng build --prod --base-href /angular-nested-table-test/
+
+      - name: Deploy to GitHub Pages
+        run: |
+          git config --global user.email "h.kheyreddine@gmail.com"
+          git config --global user.name "kheyreddine"
+          npx angular-cli-ghpages --dir=dist/angular-nested-table-test
