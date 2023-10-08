@@ -25,7 +25,7 @@ jobs:
         run: npm install
 
       - name: Build Angular App
-        run: ng build --prod --base-href /angular-nested-table-test/
+        run: ng build --base-href /angular-nested-table-test/
 
       - name: Deploy to GitHub Pages
         run: |
